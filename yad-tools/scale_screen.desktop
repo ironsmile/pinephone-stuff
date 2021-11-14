@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Scale Screen
+Type=Application
+Icon=video-display-symbolic
+Exec=/home/user/bin/scale_screen
+Categories=Utility;

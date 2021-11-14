@@ -1,0 +1,22 @@
+#!/bin/bash
+display=`yad --title "Select Screen" \
+	--text='Select the display which scale you want to change.' \
+	--splash \
+	--form \
+	--field='Display':cb 'HDMI-A-1!DST-1' | awk -F '|' '{ print $1 }'`
+
+if [ -z $display ]; then
+	echo "Dialog cancelled"
+	exit
+fi
+
+echo "Selected ${display}"
+
+yad --title "Scale Screen" --form \
+  --field='Phone Screen dpi (2x scale)':fbtn "wlr-randr --output ${display} --scale 2" \
+  --field='Low dpi (1.75x scale)!window-restore-symbolic':fbtn "wlr-randr --output ${display} --scale 1.75" \
+  --field='Medium dpi (1.5x scale)!window-minimize-symbolic':fbtn "wlr-randr --output ${display} --scale 1.5" \
+  --field='High dpi (1.25x scale)!window-maximize-symbolic':fbtn "wlr-randr --output ${display} --scale 1.25" \
+  --field='Max dpi (1x scale)!view-fullscreen-symbolic':fbtn "wlr-randr --output ${display} --scale 1" \
+#  --field='Restart Phosh':fbtn "sudo systemctl restart phosh" \
+  --button='Close!gtk-cancel':1
